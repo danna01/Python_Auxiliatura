@@ -1,11 +1,11 @@
 # Python_Auxiliatura
 
-**Last update** 18 de mayo de 2021
+**Resumen**
 
  * En este repositorio encontrara la informacion correspondiente a la comparacion entre dos simulaciones que se realizaron de cuatro galaxias que estan basadas en los mismos datos y en la misma bibliografia. Por ende, el lector podra encontrar informacion sobre las propiedades de las galaxias calculadas para las dos simulaciones, asi como los resultados y los contrastes obtenidos. Para mayor informacion sobre la informacion en la que se basaron las galaxias remitase a la seccion de bibliografia.
 
-## Ultima modificacion: 19 de Mayo de 2020
-**Ultimo avance importante**:Generacion de las animaciones con los valores de los scale length para las galaxias.
+## Ultima modificacion: 25 de Mayo de 2020
+**Ultimo avance importante**: Generacion del test 4 donde se encuentran los calculos adicionales para la materia oscura.
 
 ## Notebooks
 
@@ -23,6 +23,9 @@ su contenido*
  * En este notebook puede encontrar la informacion de las simulaciones de galaxias nuevas y viejas correspondiente a la masa de las estrellas, la masa del gas y la masa correspondiente a la materia oscura. Esta informacion esta dada de manera que usted pueda comparar directamente la informacion obtenida en cada simulacion entre si y con la informacion original
  * El producto final es: Tabla donde se resumen las propiedades de masa total de estrella, gas y materia oscura para cada simulacion y para cada galaxia.
 
+### (4) Test_4
+ * En este notebook encontrara la informacion correspondiente a los calculos realizados para la materia oscura, es decir, encontrara los calculos de la masa de la materia oscura y la densidad.
+ * El producto final es: Plot con la informacion de la masa acumulada y plot con la informacion de la densidad para la materia oscura.
 
 ## Carpetas
 
@@ -36,7 +39,14 @@ su contenido*
  * Aca encontrara los diccionarios que debera utilizar en caso de que quiera generar nuevamente los histogramas mencionados en el Test_2.
 
 ### (3) Animaciones
- * En esta carpeta encontrara las animaciones para cada propiedad generadas en el Test_1. Existe una animacion por cada galaxia, por cada propiedad y por cada simulacion (sea vieja o nueva)
+ * En esta carpeta encontrara las animaciones en formato GIF para cada propiedad generadas en el Test_1. Existe una animacion por cada galaxia, por cada propiedad y por cada simulacion (sea vieja o nueva)
+
+### (4) Videos
+ * En esta carpeta encontrara las mismas animaciones de las propiedades generadas en el Test_1 pero en formato mp4.
+
+### (5) Materia_Oscura
+
+ * En esta carpeta encontrara los plots correspondientes al Test_4 que son de la masa acumulada de materia oscura y de la densidad.
 
 ## PDFs
 
@@ -50,7 +60,7 @@ Jonsson, P., Groves, B. A., & Cox, T. J. (2010). High-resolution panchromatic sp
 ### Links de interés
 
 - [Awesome readme files](https://github.com/matiassingers/awesome-readme)
-- [Manual de animaciones con matplotlib](https://www.kdnuggets.com/2019/05/animations-with-matplotlib.html)
+	- [Manual de animaciones con matplotlib](https://www.kdnuggets.com/2019/05/animations-with-matplotlib.html)
 - [Manual de animaciones con MoviePy](https://splox.net/resources/create-animations-with-moviepy/?fbclid=IwAR3Mvie7GbbPg-t8QKKQCa2UJ9LGDpGCBWDQwo3J_saGXY0NEUt3t_I2B6o)
 
 
