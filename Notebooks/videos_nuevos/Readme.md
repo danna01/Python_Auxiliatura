@@ -1,0 +1,1 @@
+Contenido: En esta carpeta encontrara los videos con los plots de densidad superficial de estrellas, de gas y las curvas de rotacion de cada uno de los snapshots de cada galaxia de acuerdo a los limites establecidos en base al scale lenght.

@@ -1,0 +1,1 @@
+Contenido: En esta carpeta encontrara los plots de la densidad superficial de estrellas, de gas y las curvas de rotacion de las galaxias para cada snapshot con los primeros limites establecidos a base de prueba y error.

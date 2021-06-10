@@ -1,0 +1,1 @@
+Contenido: En esta carpeta encontraras los GIF de los perfiles de densidad de gas, de estrellas y las curvas de rotacion de cada galaxia con los limites definidos aleatoriamente, en base a ejercicios de prueba y error.
