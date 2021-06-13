@@ -56,14 +56,23 @@ su contenido*
 
  * En esta carpeta encontrara los plots correspondientes al Test_4 que son de la masa acumulada de materia oscura y de la densidad.
 
+#### 5.1) Comparaciones
+ * En esta carpeta encontrara los plots de masa acumulada y de densidad de materia oscura para las galaxias G0 y G1 comparadas para las simulaciones nuevas y antiguas.
+
 ## PDFs
 
 ### Jonsson_et_al_2010
  * Este documento corresponde a la bibliografia principal de este proyecto, en donde encontrara los valores iniciales de las galaxias en las cuales fueron basadas las simulaciones que se estan comparando aca. Para comparar los datos aca obtenidos, con los originales puede remitirse a este documento.
 
+### Pineda_et_al_2020
+ * Este documento corresponde al PDF del paper que encontrara en la bibliografia con el titulo de Rotation curve fitting and its fatal attraction to cores in realistically simulated galaxy observations.
+
 ## Bibliografia
 
 Jonsson, P., Groves, B. A., & Cox, T. J. (2010). High-resolution panchromatic spectral models of galaxies including photoionization and dust. Monthly Notices of the Royal Astronomical Society, 403(1), 17-44. [Document](https://ui.adsabs.harvard.edu/abs/2010MNRAS.403...17J/abstract) 
+
+Pineda, J., Hayward, C., Springel, V., Mendes-de-Oliveira, C. (2017). Rotation curve fitting and its fatal attraction to cores in realistically simulated galaxy observations. Monthly Notices of the Royal Astronomical Society, 466, 63–87. [Document](https://watermark.silverchair.com/stw3004.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAqEwggKdBgkqhkiG9w0BBwagggKOMIICigIBADCCAoMGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMH-Y9-UTvkA2mGdRJAgEQgIICVAjpsrVqYoGYO8pcdIQXpxCAZ6OaiIo_dyQDPqWdxyvWBkNIwnqcQfFg7IUgRnh4j05ffNzvywTQ6YWWB35vsSXjifWgS2hhz4OmdCK67RAVZBorxuTb0UKT7JGLZXv4RPZ9jroEFUYrP7Mk8JoOy4ksT7JvpiE4xJFbcLfXBshalLQYrFjnaweYE1ajBKoiM7FIiVmHHolhUHqp5O14DGzhfDhSWQSqw23LIVA-yEqd5u7TXVnTL69oww-NUyppUmMJ15kWEYlybNs5TJc-UoxcPzMs8NaVhkjYQ9-W8DLRzBsK2CnqGqPmFm3Wx3QTyGQLKmSnVm05LXH7-BQgJF7qdDLbSdPD0XK7VdP9NrK_Qlf8JXq7-onPSKbDwHqO5cRW-zqzRn5MNJd-fxwp6kDUJDfkccyx8BmMypXstw1Qn5WERp0QKMYya3siqteYXoU8E7egiutCf7nM7vKZr635Cuwu8Hh7w_gX2mTgmgjDw3C5gZg5ldwBG8TfE7z9kwfxLtyZCw8uPh-ot7FFFG4SPjN5V6G_B4zrT6Wm5Xn0skhOn2z8GKAHT1gu0rWHKyV4b9MleytMg8qpbCUBlFzVckNfy1TCmBu2QUOdt4tnvKVhxVBGQUJYoNsYqWacy-FdK8lt_kOPjgqe_sXkGNbg31zCUS4iCLPMtL-XGso8Eqg1YpifPA2iqcoRS70wSU40XRo_ndTuSH6eG7dzCTr0cEsGbp2pGMYSJ27DWJDKU6d9sMU5u__qDv8kw7t9Ru2UpH4ZKqf9M71Y3MEKInMAtyEc)
+
 
 ### Links de interés
 
