@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 def accumulated_mass(pos,mass,n,limits):
     """
     La funcion accumulated_mass va a calcular la 
@@ -40,7 +41,7 @@ def accumulated_mass(pos,mass,n,limits):
 
 
 
-def plot_mass(data1,data2,filename):
+def plot_mass(filename):
     """
     La funcion plot_mass va a permitirle graficar las masas
     acumuladas de cada simulacion vs el radio para poder
@@ -58,24 +59,25 @@ def plot_mass(data1,data2,filename):
     
     """
     fig = plt.figure(figsize=(10, 7))
-    try:
-        for snap in np.arange(100,700,200): 
-            snap = str(snap).zfill(3)  
+    
+    for snap in np.arange(100,700,200):
+        snap = str(snap).zfill(3) 
+        try:
             data_viejo_ruta = pynbody.load(data_viejo+'/'+gal+'/snapshot_'+snap+'.hdf5')
-            binsold, massold = accumulated_mass(data_viejo_ruta.star['pos'],data_viejo_ruta.star['mass'],
-                                                n=int(limites_star[gal][1]*5),limits=limites_star[gal])
+            binsold, massold =accumulated_mass(data_viejo_ruta.star['pos'],data_viejo_ruta.star['mass'],
+                              n=int(limites_star[gal][1]*5),limits=limites_star[gal])
             plt.plot(binsold,massold,'-r', label= 'Old Galaxies',alpha=0.5)
-    except:
-        pass
+        except:
+            pass
         
     for snap in np.arange(1,600,1): 
         snap = str(snap).zfill(3)
         data_nuevo_ruta = pynbody.load(data_nuevo+'/'+gal+'/snapshot_'+snap+'.hdf5')
         binsnew, massnew = accumulated_mass(data_nuevo_ruta.star['pos'],data_nuevo_ruta.star['mass'],
                                             n=int(limites_star[gal][1]*5),limits=limites_star[gal]) 
-        
-    plt.plot(binsnew,massnew,'-k',label= 'New Galaxies',alpha=0.5)
-    plt.title('Masa acumulada de la Materia Oscura '+gal, fontsize= 20)
+        plt.plot(binsnew,massnew,'-k',label= 'New Galaxies',alpha=0.5)
+   
+    plt.title('Masa acumulada de Estrellas '+gal, fontsize= 20)
     plt.xlabel('Radio [Kpc]',fontsize=18)
     plt.ylabel('Masa Acumulada (10$^{10}$ $M_\odot$)',fontsize=18)
     plt.legend()
@@ -99,24 +101,24 @@ def plot_gas(filename):
     
     """
     fig = plt.figure(figsize=(10, 7))
-    try:
-        for snap in np.arange(100,700,200): 
-            snap = str(snap).zfill(3)  
+    for snap in np.arange(100,700,200):
+        snap = str(snap).zfill(3)
+        try:
             data_viejo_ruta = pynbody.load(data_viejo+'/'+gal+'/snapshot_'+snap+'.hdf5')
             binsold, massold = accumulated_mass(data_viejo_ruta.gas['pos'],data_viejo_ruta.gas['mass'],
                                                 n=int(limites_gas[gal][1]*5),limits=limites_gas[gal])
             plt.plot(binsold,massold,'-r', label= 'Old Galaxies',alpha=0.5)
-    except:
-        pass
+        except:
+            pass
         
     for snap in np.arange(1,600,1): 
         snap = str(snap).zfill(3)
         data_nuevo_ruta = pynbody.load(data_nuevo+'/'+gal+'/snapshot_'+snap+'.hdf5')
         binsnew, massnew = accumulated_mass(data_nuevo_ruta.gas['pos'],data_nuevo_ruta.gas['mass'],
                                             n=int(limites_gas[gal][1]*5),limits=limites_gas[gal]) 
-        
-    plt.plot(binsnew,massnew,'-k',label= 'New Galaxies',alpha=0.5)
-    plt.title('Masa acumulada de la Materia Oscura '+gal, fontsize= 20)
+        plt.plot(binsnew,massnew,'-k',label= 'New Galaxies',alpha=0.5)
+    
+    plt.title('Masa acumulada de Gas '+gal, fontsize= 20)
     plt.xlabel('Radio [Kpc]',fontsize=18)
     plt.ylabel('Masa Acumulada (10$^{10}$ $M_\odot$)',fontsize=18)
     plt.legend()
