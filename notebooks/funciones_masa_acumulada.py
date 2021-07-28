@@ -1,4 +1,14 @@
+import pynbody
 import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+from scipy import optimize
+import scipy.stats
+from astropy import units as unit
+import sys
+from matplotlib.animation import FuncAnimation
+import funciones_masa_acumulada as facma
+
 def accumulated_mass(pos,mass,n,limits):
     """
     La funcion accumulated_mass va a calcular la 
