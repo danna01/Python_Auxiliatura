@@ -1,3 +1,13 @@
+import pynbody
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+from scipy import optimize
+from astropy import units as unit
+import sys
+import Funciones as fn
+from matplotlib.animation import FuncAnimation
+
 def compile_data(origin,gal,minsnap,maxsnap,stepsnap,limites1,limites2):
     """
     La funcion compile_data permite almacenar de manera

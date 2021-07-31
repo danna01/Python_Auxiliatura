@@ -1,3 +1,13 @@
+import pynbody
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+from scipy import optimize
+import scipy.stats
+from astropy import units as unit
+import sys
+from matplotlib.animation import FuncAnimation
+
 def accumulated_mass(posnew,massnew,posold, massold,n,limits):
     """
     La funcion accumulated_mass va a calcular la 
@@ -54,92 +64,6 @@ def accumulated_mass(posnew,massnew,posold, massold,n,limits):
     
     return positionsnew, histo_acum_new[0], positionsold, histo_acum_old[0]
 
-
-def density_dm(xnew,ynew,xold,yold):
-    """
-    La funcion density_dm va a calcular la  densidad de la masa
-    que se acumula en cada una de las barras del histograma y 
-    permite compararlas para las galaxias nuevas y viejas.
-    
-    Parameters
-    ----------
-    xnew : ndarray
-       valores de las posiciones de los radios limite de las 
-       barras del histograma (galaxias nuevas).
-    ynew : ndarray
-       valor de la masa acumulada para 
-       cada radio limite (galaxias nuevas).
-    xold : ndarray
-       valores de las posiciones de los radios limite de las 
-       barras del histograma (galaxias viejas).
-    yold : ndarray
-       el valor de la masa acumulada para 
-       cada radio limite (galaxias viejas).
-        
-    Returns
-    -------
-    bins_middle_new : ndarray
-        retorna los valores de los radios
-        promedios de cada barra (galaxias nuevas).
-    shell_mass_new : ndarray
-        retorna el valor de la masa en cada cascaron para 
-        cada radio limite (galaxias nuevas).
-    densnew : ndarray
-        retorna los valores de la densidad
-        de cada cascaron (galaxias nuevas).
-    bins_middle_old : ndarray
-        retorna los valores de los radios
-        promedios de cada barra (galaxias viejas).
-    shell_mass_old : ndarray
-        retorna el valor de la masa en cada cascaron para 
-        cada radio limite (galaxias viejas).
-    densold : ndarray
-        retorna los valores de la densidad
-        de cada cascaron (galaxias viejas).
-           
-    Notes
-    -----
-    Recuerde que la funcion de densidad es: \rho = (4/3)*pi*R^3
-    
-    """
-    xnew,ynew, xold, yold =     accumulated_mass(data_nuevo_ruta.dm['pos'],data_nuevo_ruta.dm['mass'],data_viejo_ruta.dm['pos'],data_viejo_ruta.dm['mass'],n=int(limites_materia_oscura[gal][1]*4),limits=limites_materia_oscura[gal])
-    x2new = np.roll(xnew,1)
-    x2new[0]=0
-    
-    bins_middle_new = (xnew + x2new )/2
-    
-    x_cubico_new = xnew**3
-    x_cubico_2_new = np.roll(x_cubico_new,1)
-    x_cubico_2_new[0]=0
-   
-    y2new = np.roll(ynew,1)
-    y2new[0]=0
-  
-    shell_mass_new = ynew - y2new
-    
-    # \rho = (4/3)*pi*R^3
-    densnew = 3* shell_mass_new / ((4*np.pi)* (x_cubico_new - x_cubico_2_new) )
-    
- 
-    x2old = np.roll(xold,1)
-    x2old[0]=0
-    bins_middle_old = (xold + x2old )/2
-    
-    x_cubico_old = xold**3
-    x_cubico_2_old = np.roll(x_cubico_old,1)
-    x_cubico_2_old[0]=0
-    
-    y2old = np.roll(yold,1)
-    y2old[0]=0
-   
-    shell_mass_old = yold - y2old
-    
-    # \rho = (4/3)*pi*R^3
-    densold = 3* shell_mass_old / ((4*np.pi)* (x_cubico_old - x_cubico_2_old) ) 
-    
-    return bins_middle_new, shell_mass_new, densnew, bins_middle_old, shell_mass_old, densold
-
-
 def plot_mass(binsnewg0,massnewg0,binsoldg0,massoldg0,binsnewg1,massnewg1,binsoldg1,massoldg1,filename):
     """
     La funcion plot_mass va a permitirle graficar las masas
@@ -189,46 +113,6 @@ def plot_mass(binsnewg0,massnewg0,binsoldg0,massoldg0,binsnewg1,massnewg1,binsol
     plt.ylabel('Masa Acumulada ($1x10^{10}$ $M_\odot$)',fontsize=20)
     plt.text(60, 0, '$h_\star$ G0=1.1', fontsize=15, color='black')
     plt.text(60, 1, '$h_\star$ G1=1.5', fontsize=15, color='black')
-    plt.legend()
-    plt.grid()
-    plt.savefig(filename)
-    plt.clf()
-    plt.close()
-    
-
-def plot_density(binsnew,densnew,binsold, densold, filename):
-    """
-    La funcion plot_mass va a permitirle graficar las masas
-    acumuladas de cada simulacion vs el radio para poder
-    comparar los datos obtenidos.
-    
-    Parameters
-    ----------
-    binsnew : ndarray
-        valores de los radios
-        promedios de cada barra (galaxias nuevas).
-    densnew : ndarray
-        valores de la densidad
-        de cada cascaron (galaxias nuevas).
-    binsold : ndarray
-        valores de los radios
-        promedios de cada barra (galaxias viejas).
-    densold : ndarray
-        valores de la densidad
-        de cada cascaron (galaxias viejas).
-    filename : str
-        este atributo nos va a permitir 
-        el almacenamiento de los plots generados.
-    
-    """
-    fig = plt.figure(figsize=(10, 7))
-    
-    plt.plot(binsnew, np.log10(densnew), '-k', label= 'New Galaxies '+gal+'/'+snap)
-    plt.plot(binsold, np.log10(densold), '-r', label= 'Old Galaxies')
-   
-    plt.title('Perfil de densidad de materia oscura', fontsize = 18)
-    plt.xlabel('Radio [Kpc]', fontsize = 20)
-    plt.ylabel(r'$\rho$ [$1x10^{10}$ Msol/$kpc^{2}$]', fontsize = 20)
     plt.legend()
     plt.grid()
     plt.savefig(filename)

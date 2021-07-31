@@ -1,3 +1,13 @@
+import pynbody
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.optimize import curve_fit
+from scipy import optimize
+from astropy import units as unit
+import sys
+import Funciones as fn
+from matplotlib.animation import FuncAnimation
+
 def density(pos,mass,n,limits):
     """
     La funcion densidad nos permite calcular la densidad
