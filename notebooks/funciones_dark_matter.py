@@ -7,7 +7,13 @@ import scipy.stats
 from astropy import units as unit
 import sys
 from matplotlib.animation import FuncAnimation
-import funciones_dark_matter as fdm
+
+data_nuevo = '/media/danna01/Disk/SNAPSHOTS/Galaxias_Nuevas'
+data_viejo = '/media/danna01/Disk/SNAPSHOTS/Galaxias_Viejas'
+
+dicti = {}
+galaxies = ['G0', 'G1', 'G2', 'G3']
+limites_materia_oscura = {'G0':(0,55), 'G1':(0,75), 'G2':(0,95), 'G3':(0,140)} 
 
 def accumulated_mass(pos,mass,n,limits):
     """

@@ -5,7 +5,8 @@ from scipy.optimize import curve_fit
 from scipy import optimize
 from astropy import units as unit
 import sys
-import Funciones as fn
+import funciones as fn
+import pickle
 from matplotlib.animation import FuncAnimation
 
 def compile_data(origin,gal,minsnap,maxsnap,stepsnap,limites1,limites2):
@@ -94,6 +95,21 @@ def extract_qtt(dictionary,quantity):
     else:
         lista = [dictionary[snap][quantity] for snap in dictionary.keys()]
     return lista
+
+file = open('Archivos/diccionarios_nuevos/compilation_new', 'rb')
+super_dict = pickle.load(file)
+file.close()
+
+# Lectura del diccionario viejo
+
+file = open('Archivos/diccionarios_nuevos/compilation_old', 'rb')
+super_dict_old = pickle.load(file)
+file.close()
+
+# Dado que no tenemos la informacion de G2 y G3, creamos diccionarios vacios.
+
+super_dict_old['G2']={} 
+super_dict_old['G3']={} 
 
 def show_results(dicti, dicti_old, gal):
     """
@@ -242,3 +258,4 @@ def show_results_2(dicti, dicti_old, gal):
         x = Vmax_old
         y = np.array([50,50,50])
         plt.plot(x,y,"ok")
+        

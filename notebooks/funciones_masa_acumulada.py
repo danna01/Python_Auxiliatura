@@ -9,6 +9,15 @@ import sys
 from matplotlib.animation import FuncAnimation
 import funciones_masa_acumulada as facma
 
+data_nuevo = '/media/danna01/Disk/SNAPSHOTS/Galaxias_Nuevas'
+data_viejo = '/media/danna01/Disk/SNAPSHOTS/Galaxias_Viejas'
+
+dicti = {}
+galaxies = ['G0', 'G1', 'G2', 'G3']
+gal = ['G0', 'G1', 'G2', 'G3']
+limites_star = {'G0':(0,10), 'G1':(0,15), 'G2':(0,20), 'G3':(0,25)}
+limites_gas = {'G0':(0,25), 'G1':(0,35), 'G2':(0,50), 'G3':(0,80)} 
+
 def accumulated_mass(pos,mass,n,limits):
     """
     La funcion accumulated_mass va a calcular la 
@@ -70,22 +79,33 @@ def plot_mass(filename):
     """
     fig = plt.figure(figsize=(10, 7))
     
-    for snap in np.arange(100,700,200):
+    for snap in np.arange(300,500,200):
         snap = str(snap).zfill(3) 
         try:
+            data_viejo_ruta_100 = pynbody.load(data_viejo+'/'+gal+'/snapshot_100.hdf5')
+            binsold, massold = accumulated_mass(data_viejo_ruta_100.star['pos'],data_viejo_ruta_100.star['mass'],
+                          n=int(limites_star[gal][1]*5),limits=limites_star[gal])
+            plt.plot(binsold,massold,'-r', label= 'Old Galaxies')
+            
             data_viejo_ruta = pynbody.load(data_viejo+'/'+gal+'/snapshot_'+snap+'.hdf5')
             binsold, massold =accumulated_mass(data_viejo_ruta.star['pos'],data_viejo_ruta.star['mass'],
                               n=int(limites_star[gal][1]*5),limits=limites_star[gal])
-            plt.plot(binsold,massold,'-r', label= 'Old Galaxies',alpha=0.5)
+            plt.plot(binsold,massold,'-r')
+       
         except:
             pass
-        
-    for snap in np.arange(1,600,1): 
+    
+    data_nuevo_ruta_000 = pynbody.load(data_nuevo+'/'+gal+'/snapshot_000.hdf5')
+    binsnew, massnew = accumulated_mass(data_nuevo_ruta_000.star['pos'],data_nuevo_ruta_000.star['mass'],
+                                        n=int(limites_star[gal][1]*5),limits=limites_star[gal]) 
+    plt.plot(binsnew,massnew,'-k',alpha=0.2,label= 'New Galaxies')   
+    
+    for snap in np.arange(2,4,1): 
         snap = str(snap).zfill(3)
         data_nuevo_ruta = pynbody.load(data_nuevo+'/'+gal+'/snapshot_'+snap+'.hdf5')
         binsnew, massnew = accumulated_mass(data_nuevo_ruta.star['pos'],data_nuevo_ruta.star['mass'],
                                             n=int(limites_star[gal][1]*5),limits=limites_star[gal]) 
-        plt.plot(binsnew,massnew,'-k',label= 'New Galaxies',alpha=0.5)
+        plt.plot(binsnew,massnew,'-k',alpha=0.2)
    
     plt.title('Masa acumulada de Estrellas '+gal, fontsize= 20)
     plt.xlabel('Radio [Kpc]',fontsize=18)
@@ -111,22 +131,31 @@ def plot_gas(filename):
     
     """
     fig = plt.figure(figsize=(10, 7))
-    for snap in np.arange(100,700,200):
+    for snap in np.arange(300,700,200):
         snap = str(snap).zfill(3)
         try:
+            data_viejo_ruta_100 = pynbody.load(data_viejo+'/'+gal+'/snapshot_100.hdf5')
+            binsold100, massold100 = accumulated_mass(data_viejo_ruta_100.gas['pos'],data_viejo_ruta_100.gas['mass'],
+                                    n=int(limites_gas[gal][1]*5),limits=limites_gas[gal])
+            plt.plot(binsold100,massold100,'-r', label= 'Old Galaxies')
+            
             data_viejo_ruta = pynbody.load(data_viejo+'/'+gal+'/snapshot_'+snap+'.hdf5')
             binsold, massold = accumulated_mass(data_viejo_ruta.gas['pos'],data_viejo_ruta.gas['mass'],
                                                 n=int(limites_gas[gal][1]*5),limits=limites_gas[gal])
-            plt.plot(binsold,massold,'-r', label= 'Old Galaxies',alpha=0.5)
+            plt.plot(binsold,massold,'-r')
         except:
             pass
+    data_nuevo_ruta_000 = pynbody.load(data_nuevo+'/'+gal+'/snapshot_000.hdf5')
+    binsnew, massnew = accumulated_mass(data_nuevo_ruta_000.gas['pos'],data_nuevo_ruta_000.gas['mass'],
+                       n=int(limites_gas[gal][1]*5),limits=limites_gas[gal]) 
+    plt.plot(binsnew,massnew,'-k',alpha=0.2,label= 'New Galaxies') 
         
-    for snap in np.arange(1,600,1): 
+    for snap in np.arange(2,600,1): 
         snap = str(snap).zfill(3)
         data_nuevo_ruta = pynbody.load(data_nuevo+'/'+gal+'/snapshot_'+snap+'.hdf5')
         binsnew, massnew = accumulated_mass(data_nuevo_ruta.gas['pos'],data_nuevo_ruta.gas['mass'],
                                             n=int(limites_gas[gal][1]*5),limits=limites_gas[gal]) 
-        plt.plot(binsnew,massnew,'-k',label= 'New Galaxies',alpha=0.5)
+        plt.plot(binsnew,massnew,'-k',alpha=0.2)
     
     plt.title('Masa acumulada de Gas '+gal, fontsize= 20)
     plt.xlabel('Radio [Kpc]',fontsize=18)

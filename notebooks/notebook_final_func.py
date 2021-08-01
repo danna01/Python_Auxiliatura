@@ -8,23 +8,24 @@ from astropy import units as unit
 import sys
 from matplotlib.animation import FuncAnimation
 
-def accumulated_mass(posnew,massnew,posold, massold,n,limits):
+data_nuevo = '/media/danna01/Disk/SNAPSHOTS/Galaxias_Nuevas'
+data_viejo = '/media/danna01/Disk/SNAPSHOTS/Galaxias_Viejas'
+
+dicti = {}
+galaxies = ['G0', 'G1']
+limites_materia_oscura = {'G0':(0,55), 'G1':(0,75)} #kpc
+
+def accumulated_mass(pos,mass,n,limits):
     """
     La funcion accumulated_mass va a calcular la 
-    masa total acumulada hasta cierto radio y va a permitirle
-    comparar los datos obtenidos para diferentes simulaciones
-    de la misma galaxia.
+    masa total acumulada hasta cierto radio.
     
     Parameters
     ----------
-    posnew : pynbody.array.SimArray
-       posicion de las particulas de cada snapshot (simulaciones nuevas)
-    massnew : pynbody.array.SimArray
-       masa de cada una de las particulas en el snapshot (simulaciones nuevas)
-    posold : pynbody.array.SimArray
-       posicion de las particulas de cada snapshot (simulaciones viejas)
-    massold : pynbody.array.SimArray
-       masa de cada una de las particulas en el snapshot (simulaciones viejas)
+    posn : pynbody.array.SimArray
+       posicion de las particulas de cada snapshot 
+    mass : pynbody.array.SimArray
+       masa de cada una de las particulas en el snapshot 
     n : int
        numero de rectangulos en el histograma
     limits : tuple
@@ -32,85 +33,61 @@ def accumulated_mass(posnew,massnew,posold, massold,n,limits):
         
     Returns
     -------
-    positionsnew : ndarray
+    positions : ndarray
         retorna los valores de las posiciones
-        de los radios limite de las barras del histograma (galaxias nuevas).
-    histo_acum_new[0] : ndarray
+        de los radios limite de las barras del histograma.
+    histo_acum[0] : ndarray
         retorna el valor de la masa acumulada para 
-        cada radio limite (galaxias nuevas).
-    positionsold : ndarray
-        retorna los valores de las posiciones
-        de los radios limite de las barras del histograma (galaxias viejas).
-    histo_acum_old[0] : ndarray
-        retorna el valor de la masa acumulada para 
-        cada radio limite (galaxias viejas).
+        cada radio limite.
            
-    Notes
-    -----
-    Esta funcion de masa acumulada sera utilizada cuando
-    se esten comparando las diferentes galaxias.
-    
     """
     
-    rnew = np.sqrt((posnew**2).sum(axis=1))
+    r = np.sqrt((pos**2).sum(axis=1))
     
-    histo_acum_new = scipy.stats.cumfreq(rnew, n, limits, weights=massnew)
+    histo_acum = scipy.stats.cumfreq(r, n, limits, weights=mass)
    
-    positionsnew = histo_acum_new[1]+ np.arange(1,n+1) * histo_acum_new[2]
-
-    rold = np.sqrt((posold**2).sum(axis=1))
-    histo_acum_old = scipy.stats.cumfreq(rold, n, limits, weights=massold)
-    positionsold = histo_acum_old[1]+ np.arange(1,n+1) * histo_acum_old[2]
+    positions = histo_acum[1]+ np.arange(1,n+1) * histo_acum[2]
     
-    return positionsnew, histo_acum_new[0], positionsold, histo_acum_old[0]
+    return positions, histo_acum[0]
 
-def plot_mass(binsnewg0,massnewg0,binsoldg0,massoldg0,binsnewg1,massnewg1,binsoldg1,massoldg1,filename):
-    """
+def plot_mass(filename):
+     """
     La funcion plot_mass va a permitirle graficar las masas
     acumuladas de cada simulacion vs el radio para poder
     comparar los datos obtenidos.
     
     Parameters
     ----------
-    binsnewg0 : ndarray
-        retorna los valores de las posiciones
-        de los radios limite de las barras del histograma (galaxias nuevas) para G0.
-    massnewg0 : ndarray
-        retorna el valor de la masa acumulada para 
-        cada radio limite (galaxias nuevas) para G0
-    binsoldg0 : ndarray
-        retorna los valores de las posiciones
-        de los radios limite de las barras del histograma (galaxias viejas) para G0.
-    massoldg0 : ndarray
-        retorna el valor de la masa acumulada para 
-        cada radio limite (galaxias viejas) para G0.
-    binsnewg1 : ndarray
-        retorna los valores de las posiciones
-        de los radios limite de las barras del histograma (galaxias nuevas) para G1.
-    massnewg1 : ndarray
-        retorna el valor de la masa acumulada para 
-        cada radio limite (galaxias nuevas) para G1.
-    binsoldg1 : ndarray
-        retorna los valores de las posiciones
-        de los radios limite de las barras del histograma (galaxias viejas) para G1.
-    massoldg1 : ndarray
-        retorna el valor de la masa acumulada para 
-        cada radio limite (galaxias viejas) para G1.
     filename : str
         este atributo nos va a permitir 
         el almacenamiento de los plots generados.
     
-    """
+    """ 
     fig = plt.figure(figsize=(10, 7))
     
-    plt.plot(binsnewg0,massnewg0,'-',color='red',label= 'New Galaxies G0/'+snap)
-    plt.plot(binsoldg0,massoldg0,'-',color='blue',label= 'Old Galaxies G0/'+snap)
-    plt.plot(binsnewg1,massnewg1,'-',color='green',label= 'New Galaxies G1/'+snap)
-    plt.plot(binsoldg1,massoldg1,'-', color='black', label= 'Old Galaxies G1/'+snap)
+    data_viejo_ruta_G0 = pynbody.load(data_viejo+'/G0/snapshot_100.hdf5')
+    binsold1G0, massold1G0 = accumulated_mass(data_viejo_ruta_G0.dm['pos'],data_viejo_ruta_G0.dm['mass'],
+                       n=int(limites_materia_oscura[gal][1]*4),limits=limites_materia_oscura[gal])
+    plt.plot(binsold1G0,massold1G0,'-k',label= 'Old Galaxies G0/100')
     
-    plt.title('Masa acumulada de la Materia Oscura', fontsize= 18)
-    plt.xlabel('Radio [Kpc]',fontsize=20)
-    plt.ylabel('Masa Acumulada ($1x10^{10}$ $M_\odot$)',fontsize=20)
+    data_nuevo_ruta_G0 = pynbody.load(data_nuevo+'/G0/snapshot_100.hdf5')
+    binsnew2G0, massnew2G0 = accumulated_mass(data_nuevo_ruta_G0.dm['pos'],data_nuevo_ruta_G0.dm['mass'],
+                       n=int(limites_materia_oscura[gal][1]*4),limits=limites_materia_oscura[gal])
+    plt.plot(binsnew2G0,massnew2G0,'-g',label= 'New Galaxies G0/100')
+    
+    data_viejo_ruta_G1 = pynbody.load(data_viejo+'/G1/snapshot_100.hdf5')
+    binsold1G1, massold1G1 = accumulated_mass(data_viejo_ruta_G1.dm['pos'],data_viejo_ruta_G1.dm['mass'],
+                            n=int(limites_materia_oscura[gal][1]*4),limits=limites_materia_oscura[gal])
+    plt.plot(binsold1G1,massold1G1,'-r',label= 'Old Galaxies G1/100')
+    
+    data_nuevo_ruta_G1 = pynbody.load(data_nuevo+'/G1/snapshot_100.hdf5')
+    binsnew2G1, massnew2G1 = accumulated_mass(data_nuevo_ruta_G1.dm['pos'],data_nuevo_ruta_G1.dm['mass'],
+                            n=int(limites_materia_oscura[gal][1]*4),limits=limites_materia_oscura[gal]) 
+    plt.plot(binsnew2G1,massnew2G1,'-b',label= 'New Galaxies G1/100')
+    
+    plt.title('Masa acumulada de la Materia Oscura', fontsize= 20)
+    plt.xlabel('Radio [Kpc]',fontsize=18)
+    plt.ylabel('Masa Acumulada (10$^{10}$ $M_\odot$)',fontsize=18)
     plt.text(60, 0, '$h_\star$ G0=1.1', fontsize=15, color='black')
     plt.text(60, 1, '$h_\star$ G1=1.5', fontsize=15, color='black')
     plt.legend()
