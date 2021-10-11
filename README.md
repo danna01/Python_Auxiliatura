@@ -6,8 +6,8 @@
 
  * En este repositorio encontrara la información correspondiente a la comparación entre dos simulaciones que se realizaron de cuatro galaxias que están basadas en los mismos datos y en la misma bibliografía. Por ende, el lector podrá encontrar información sobre las propiedades de las galaxias calculadas para las dos simulaciones, así como los resultados y los contrastes obtenidos. Para mayor información sobre los documentos en los que se basaron las galaxias remitase a la sección de bibliografía.
 
-## Última modificación: 25 de Mayo de 2020
-**Último avance importante**: Generación del test 4 donde se encuentran los cálculos adicionales para la materia oscura.
+## Última modificación: 11 de Octubre de 2021
+**Último avance importante**: Generación del test 5 que generan los graficos normalizados de masa acumulada para estrellas y gas.
 
 ## Notebooks
 
@@ -35,29 +35,72 @@ su contenido*
  * En este notebook encontrará la información correspondiente a los cálculos realizados para la materia oscura, es decir, encontrará los cálculos de la masa de la materia oscura y la densidad.
  * El producto final es: Plot con la información de la masa acumulada y plot con la información de la densidad para la materia oscura.
 
+### 7) Test_5
+ * En este notebook encontrará la información correspondiente a los cálculos realizados para la masa total acumulada de las estrellas y del gas, para cada una de las simulaciones y su comparacion con los valores teoricos.
+ * El producto final es: Plots normalizados con la masa acumulada de estrellas y de gas para cada una de las simulaciones con su valor teorico y experimental del scale lenght. 
+
+### 8) final_tables
+ * En este notebook encontrará las tablas que resumen la informacion obtenida a partir del tratamiento estadistico de las simulaciones nuevas y viejas, asi como los valores de las distintas variables de acuerdo a la literatura.
+ * El producto final es: Tablas con los valores de masa de estrellas y de gas, valores de scale lenght de estrellas y gas y de velocidad maxima de rotacion para las simulaciones nuevas y viejas asi como para los valores dados teoricamente.
+
+### 9) notebook_final
+ * En este notebook encontrará las funciones para generar los plots de materia oscura para las simulaciones nuevas y viejas correspondientes al snapshot 100 respecto a la materia oscura.
+ * El producto final es: un plot con la masa acumulada de la materia oscura para las galaxias G0 y G1 para las simulaciones nuevas y viejas. 
 ## Carpetas
 
 *A continuación encontrará una lista con los nombres de las carpetas que se han trabajado a lo largo del proyecto con una descripción sobre
 su contenido*   
 
-### 1) Plots
- * En esta carpeta encontrará los plots generados en el Test_1 que corresponde a las propiedades de perfiles de densidad superficial de gas y de estrellas y las curvas de rotación. Debe existir un plot por cada snapshot.
+## 1) Archivos
 
-### 2) Diccionarios
+### a) plots_viejos & plots_nuevos
+ * En esta carpeta encontrará los plots generados en el Test_1 que corresponde a las propiedades de perfiles de densidad superficial de gas y de estrellas y las curvas de rotación. Debe existir un plot por cada snapshot en cada carpeta de cada galaxia.
+
+### b) diccionarios_nuevos & diccionarios_viejos
  * Aca encontrará los diccionarios que deberá utilizar en caso de que quiera generar nuevamente los histogramas mencionados en el Test_2(b).
 
-### 3) Animaciones
+### c) animaciones_nuevas & animaciones_viejas
  * En esta carpeta encontrará las animaciones en formato GIF para cada propiedad generadas en el Test_1. Existe una animación por cada galaxia, por cada propiedad y por cada simulación (sea vieja o nueva).
 
-### 4) Vídeos
- * En esta carpeta encontrará las mismas animaciones de las propiedades generadas en el Test_1 pero en formato mp4.
+### d) vídeos_nuevos & videos_viejos
+ * En esta carpeta encontrará las mismas animaciones de las propiedades generadas en el Test_1 pero en formato mp4, para cada galaxia existira un video asi como para cada propiedad.
 
-### 5) Materia_Oscura
+### e) plots_materia_Oscura
 
  * En esta carpeta encontrará los plots correspondientes al Test_4 que son de la masa acumulada de materia oscura y de la densidad.
 
-#### 5.1) Comparaciones
+#### e.1) Comparaciones
  * En esta carpeta encontrará los plots de masa acumulada y de densidad de materia oscura para las galaxias G0 y G1 comparadas para las simulaciones nuevas y antiguas.
+
+### f) plots_masa
+
+ * En esta carpeta encontrará los plots con la masa acumulada de estrellas y de gas para cada galaxia, correspondiente a la primera parte del test_5.
+
+### g) plots_normalizados
+ * En esta carpeta encontrará los plots de masa acumulada de estrellas y de gas normalizados, correspondientes al test_5.
+
+## 2) plots_importantes
+ * En esta carpeta encontrará el plot con la informacion de masa acumulada de materia oscura para las galaxias G0 y G1, para el snapshot 100 para cada una de las simulaciones.
+
+## 3) plots_generales
+ * En esta carpeta encontramos la mayoria de plots correspondientes al test_5 en donde hay informacion sobre la masa acumulada de estrellas y de gas para cada una de las galaxias, comparandola con la informacion teorica y poniendole su correspondiente desviacion estandar.
+
+## Python files
+
+### funciones.py
+ * En este documento encontrara las funciones con su respectiva documentacion utilizadas para el test_1.
+
+### funciones_dark_matter.py
+ * En este documento encontrara las funciones con su respectiva documentacion utilizadas para el test_4.
+
+### funciones_masa_acumulada.py
+ * En este documento encontrara las funciones utilizadas para calcular la masa acumulada y la densidad para diferentes notebooks.
+
+### notebook_final_func.py
+ * En este documento encontrara las funciones con utilizadas para el notebook llamado notebook_final.
+
+### special_functions.py
+ * En este documento encontrara las funciones utilizadas en ciertos notebooks de manera especifica y que no son generales para todos los plots aqui construidos.
 
 ## PDFs
 
